@@ -1,24 +1,64 @@
 java c
-CMPE1250 – LAB #1: SCI Tx and Rx, RTI based events. 
-The purpose of this LAB is to be able to configure different time settings based on the RTI.
-Those settings could be changed through button presses as well as through input received from the terminal. We will also send feedback to the terminalso the user can interact with the firmware running on the board.
-PART A 
-Create an RTI non-blocking event to toggle the RED LED every 50[ms]. Given the fact that the RTI provides you with an accurate 1[ms] tick, this should be a simple task to accomplish. Verify this functionality using an oscilloscope or AD2.
-PART B 
-We will now allow this toggle event to be adjusted to settings between 10[ms] and 100[ms], inclusive. Add functionality such that when the UP switch is pressed, the RED LED toggle
-event will increase the time in multiples of 10[ms] up to a maximum of 100[ms]. Pressing   the DOWN switch will decrease the RED LED toggle event in multiples of 10[ms] down to a minimum of 10[ms]. Verify this functionality using an oscilloscope or AD2.
-PART C 
-Up to this point you have been sending ascii characters to the terminal as well as receiving them from it. Including the stdio.h library will allow you to, for instance, send a number formatted as text using sprintf. The other capability is to receive text from the terminal and parse it to a number, if possible, using sscanf. The sscanf function will return 1 if the text was able to be parsed into a number using the format specifier (%d, %f, etc.), otherwise it will return 0. This could help you handle the wrong input.
-We wo代 写CMPE1250 – LAB #1: SCI Tx and Rx, RTI based events
-代做程序编程语言uld now like to set the toggle event time to any number between 10 and 100 inclusive, having a resolution of 1[ms] this time, as opposed to the 10[ms] in Part B. This will be accomplished adding the following functionality: 
--     Accept input from the terminal and process it once the user presses the ENTER key (CR).
--     If the input cannot be parsed into a number of the format specifierselected, send the following message to the sci: “Input in the wrong format”. 
--     If the input can be parsed into a number, but it is less than 10, or greater than 100, send the following message to the sci: "Wrong setting, number must be between 10 and 100 inclusive”. 
--     If the number meets the requirements for a proper toggle event as defined, adjust the RED LED toggle time in [ms] to be set to the value entered. At this point, send the following message to the sci: “RTI event set to xx[ms]”, where xx is the number of milliseconds the time event was updated to. Verify this functionality using an oscilloscope or AD2. Make sure to add “\r\n” at the end of each message sent to the sci so they can be display in a single line.
-Remarks 
-•    Please note that if you send a number from the sci to set the time to anon-multiple of
-10, the button presses should still work after with increments and decrements by 10, but the time should never exceed 100[ms] or be less than 10[ms].
-•    Once you have completed Part C, you could add the feedback message: “ RTI event set to xx[ms]” to also be sent to the sci when the UP or DOWN switches are pressed.
+COURSE OUTLINE 
+COURSE NAME:  Embedded System Fundamentals 
+COURSE CODE:   CMPE1250 
+2024/2025 
+COURSE DESCRIPTION 
+Dedicated embedded controllers exist in vehicles, appliances, and electronic systems. A foundation in embedded controllers is essential for building and programming these systems. Students will learn to program an embedded controller and interface it to a variety of input and output devices. 
+Course Credits: 3.00
+Pre-requisites: CMPE1100,CMPE1300, CMPE1550
+LEARNING OUTCOMES 
+OUTCOME 
+Upon successful completion of this course, you will be able to 
+1 
+Program and debug a microcontroller using a high level language 
+The following concepts, skills, and issues are used to support this Outcome: 
+•   Program a microcontroller using a tool chain, including an Integrated Development Environment (IDE) 
+• Write structured modular code libraries 
+• Manipulate number systems and codes to generate formatted outputs, including binary, BCD, hexadecimal, decimal, and ASCII 
+•   Perform. bitwise operations on data and device registers 
+• Analyze data sheets to create code that uses device characteristics appropriately in meeting design specifications 
+• Write programs to perform. accurate time interval generation with on-device modules 
+2 
+Interface a microcontroller to devices connected over General Purpose Input/Output (GPIO) The following concepts, skills, and issues are used to support th代 写CMPE1250 Embedded System Fundamentals 2024/2025R
+代做程序编程语言is Outcome: 
+• Configure discrete general purpose input/output (GPIO) pins to provide simple human-machine interfaces (switches and LEDs) 
+•   Employ GPIO to control external devices 
+3 
+Interface a microcontroller to devices through a synthetic bus created over GPIO The following concepts, skills, and issues are used to support this Outcome: 
+•   Employ banks of GPIO pins as parallel data buses and control lines to interface devices, such as seven-segment displays and LCD displays 
+• Apply information from device data sheets to develop reusable code libraries 
+
+4 
+Design and implement a serial communication interface (SCI) 
+The following concepts, skills, and issues are used to support this Outcome: 
+• Explain the EIA/TIA-232 protocol and frame. formats 
+• Create and use library code that operates the devices provided UART module 
+•   Interact with and debug software on a microcontroller using a UART module 
+
+STUDENT EVALUATION 
+OUTCOME 
+ACTIVITY DESCRIPTION 
+
+MARK DISTRIBUTION 
+1, 2 and 3 
+Assignments 
+
+30% 
+1, 2 and 3 
+Exams 
+
+70% 
+
+TOTAL 
+100% 
+COURSE COMPLETION REQUIREMENTS 
+A minimum grade of 50% is required to pass this course.
+A weighted average of at least 50% on Exams is required in order to receive a passing grade on this course, otherwise a maximum final grade of 45% will be awarded. 
+
+
+
+
 
          
 加QQ：99515681  WX：codinghelp  Email: 99515681@qq.com
