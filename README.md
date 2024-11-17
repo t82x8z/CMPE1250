@@ -1,18 +1,24 @@
 java c
-CMPE1250 - ICA #8, Serial Communication Interface (SCI) 
-Built a new library (compilation unit), according to the header “sci.h” provided. You are required to provide an implementation of the basic functions described in the header file.
-This assignment verifies the functions in the library and introduces you to SCI operation and interfacing with a terminal.
-Part 1 
-Locate and run a Terminal. To begin with, use the 19200 baud communication rate and default settings for the rest (8 data bits, no parity, 1 stop bit, no flow control). Write a program that that repeatedly receives a character from the terminal (i.e. the computer keyboard) and echoes it back to the terminal (i.e. the computer monitor). This will involve the use of sci0_rxByte() (non-blocking) and sci0_txByte(). If you are using Tera Term, goto setup->Terminal and make sure the Local echo function is enabled. Can    you run your code and explain what is happening and why? 
-Try this other baud rates as an exercise: 38400, 115200. Can they all work at 8[MHz] bus speed? Explain  why yes or why not. If one of them cannot run at 8[MHz], make sure you set your bus speed to 20[代 写CMPE1250 – ICA #8, Serial Communication Interface (SCI)R
-代做程序编程语言Mhz].
-Part 2 
-For this part, keep the baud rate at 19,200. Add code that will perform. the following:
--      Pressing the LEFT switch will turn the RED LED ON and send the message:  "LEFT pressed\r\n" to the sci0. Releasing the LEFT switch will turn the RED LED OFF and send the message: "LEFT released\r\n" to the sci0.
--      Pressing the CENTER switch will turn the YELLOW LED ON and send the message:  "CENTER pressed\r\n" to the sci0. Releasing the CENTER switch will turn the YELLOW LED OFF and send the message: "CENTER released\r\n" to the sci0. 
--      Pressing the RIGHT switch will turn the GREEN LED ON and send the message:  "RIGHT pressed\r\n" to the sci0. Releasing the CENTER switch will turn the GREEN LED OFF and send the message: " RIGHT released\r\n" to the sci0.
-Please note hat for this part to work properly you need to track the “state” of the switch, so it performs the operation only once per press and once per release.
-Why do we add “\r\n” at the end of the message? what happens if we do not add those or if we add only one of them? Experiment and explain your conclusions.
+CMPE1250 – LAB #1: SCI Tx and Rx, RTI based events. 
+The purpose of this LAB is to be able to configure different time settings based on the RTI.
+Those settings could be changed through button presses as well as through input received from the terminal. We will also send feedback to the terminalso the user can interact with the firmware running on the board.
+PART A 
+Create an RTI non-blocking event to toggle the RED LED every 50[ms]. Given the fact that the RTI provides you with an accurate 1[ms] tick, this should be a simple task to accomplish. Verify this functionality using an oscilloscope or AD2.
+PART B 
+We will now allow this toggle event to be adjusted to settings between 10[ms] and 100[ms], inclusive. Add functionality such that when the UP switch is pressed, the RED LED toggle
+event will increase the time in multiples of 10[ms] up to a maximum of 100[ms]. Pressing   the DOWN switch will decrease the RED LED toggle event in multiples of 10[ms] down to a minimum of 10[ms]. Verify this functionality using an oscilloscope or AD2.
+PART C 
+Up to this point you have been sending ascii characters to the terminal as well as receiving them from it. Including the stdio.h library will allow you to, for instance, send a number formatted as text using sprintf. The other capability is to receive text from the terminal and parse it to a number, if possible, using sscanf. The sscanf function will return 1 if the text was able to be parsed into a number using the format specifier (%d, %f, etc.), otherwise it will return 0. This could help you handle the wrong input.
+We wo代 写CMPE1250 – LAB #1: SCI Tx and Rx, RTI based events
+代做程序编程语言uld now like to set the toggle event time to any number between 10 and 100 inclusive, having a resolution of 1[ms] this time, as opposed to the 10[ms] in Part B. This will be accomplished adding the following functionality: 
+-     Accept input from the terminal and process it once the user presses the ENTER key (CR).
+-     If the input cannot be parsed into a number of the format specifierselected, send the following message to the sci: “Input in the wrong format”. 
+-     If the input can be parsed into a number, but it is less than 10, or greater than 100, send the following message to the sci: "Wrong setting, number must be between 10 and 100 inclusive”. 
+-     If the number meets the requirements for a proper toggle event as defined, adjust the RED LED toggle time in [ms] to be set to the value entered. At this point, send the following message to the sci: “RTI event set to xx[ms]”, where xx is the number of milliseconds the time event was updated to. Verify this functionality using an oscilloscope or AD2. Make sure to add “\r\n” at the end of each message sent to the sci so they can be display in a single line.
+Remarks 
+•    Please note that if you send a number from the sci to set the time to anon-multiple of
+10, the button presses should still work after with increments and decrements by 10, but the time should never exceed 100[ms] or be less than 10[ms].
+•    Once you have completed Part C, you could add the feedback message: “ RTI event set to xx[ms]” to also be sent to the sci when the UP or DOWN switches are pressed.
 
          
 加QQ：99515681  WX：codinghelp  Email: 99515681@qq.com
